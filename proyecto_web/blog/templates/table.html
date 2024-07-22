@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <style>
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 2px solid #fff; 
+            color: white; 
+        }
+
+        
+        .table th,
+        .table td {
+            border: 1px solid #fff; 
+            padding: 8px; 
+            text-align: left; 
+        }
+
+      
+        .table th {
+            background-color: #136117; 
+        }
+
+        
+        .table img {
+            max-width: 100px; 
+            display: block; 
+            margin: 0 auto; 
+        }
+        #button{
+        background-color: rgb(25, 83, 33); 
+        border-radius: 10px; 
+    }
+    </style>
+
+    <table class="table">
+        <br>
+        <thead>
+            <tr>
+                <th scope="col">Categoría</th>
+                <th scope="col">Título</th>
+                <th scope="col">Contenido</th>
+                <th scope="col">Imagen</th>
+                <th scope="col">Autor</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+                <tr>
+                    <td>
+                        {% for categoria in post.categorias.all %}
+                            {{ categoria.nombre }}
+                        {% endfor %}
+                    </td>
+                    <td>{{ post.titulo }}</td>
+                    <td>{{ post.contenido }}</td>
+                    <td><img src="{{ post.imagen.url }}"></td>
+                    <td>{{ post.autor }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div style="text-align: center;">
+    <button style="background-color: rgb(25, 83, 33); border-radius: 10px;"><a style="color: white;" href="{% url 'blog' %}">Posts Completos</a></button>
+</div>
+{% endblock %}
+

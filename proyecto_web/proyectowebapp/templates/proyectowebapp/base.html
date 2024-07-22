@@ -1,0 +1,168 @@
+{% load static %}
+<html>
+  <style>
+  
+    .desplegable-content {
+      display: none;
+      position: absolute;
+      background-color: #f7fbf9;
+    }
+  
+    .desplegable-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+  
+    .desplegable:hover .desplegable-content {
+      display: block;
+    }
+  
+  </style>
+<head>
+
+
+
+    <!-- Bootstrap -->
+    <link href="{% static 'proyectowebapp'%}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+     <!-- Fonts -->
+    
+     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet"> 
+     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+     
+
+    <!-- Styles -->
+    <link href="{% static 'proyectowebapp'%}/css/gestion.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <h1 class="site-heading text-center text-white d-none d-lg-block">
+      
+        <span class="site-heading-lower">Gestión de Pedidos</span>
+      </h1>
+<div style="color: white; text-align: right; margin-right: 100px;">
+  {% if user.is_authenticated %}
+  {{user.username}}&nbsp;&nbsp; <a href="{% url 'cerrar_sesion' %}">Cerrar Sesion</a>
+  {% else %}
+  <a href="{% url 'loguear' %}">Login</a>&nbsp;&nbsp;<a href="{% url 'Autenticacion' %}">Registrate</a>
+  {% endif %}
+  
+</div>
+
+
+ <!-- Navbar -->
+ <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="{% url 'home' %}">Gestión de Pedidos</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item {% if request.path == '/' %} active {% endif %} px-lg-4">
+          <a class="nav-link text-uppercase text-expanded" href="{% url 'home' %}">Inicio</a>
+        </li>
+          <li class="nav-item {% if request.path == '/servicios/' %} active {% endif %} px-lg-4">
+            <!-- <a class="nav-link text-uppercase text-expanded" href="http://localhost:8000/servicios">Servicios</a> -->
+            <li class="nav-item {% if request.path == '/servicios/' %}active {% endif %} px-lg-4">
+              <div class="desplegable">
+                <a class="nav-link text-uppercase text-expanded" href="#">Servicios</a>
+                <div class="desplegable-content">
+                  <a href="{% url 'servicios' %}">Mostrar</a>
+                  <a href="http://127.0.0.1:8000/admin/">Agregar Servicios</a>
+                </div>
+              </div>
+            </li>
+          <li class="nav-item {% if request.path == '/tienda/' %} active {% endif %} px-lg-4">
+            <!-- <a class="nav-link text-uppercase text-expanded" href="http://localhost:8000/tienda">Tienda</a> -->
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'Tienda' %}">Tienda</a>
+          </li>
+          <li class="nav-item  {% if request.path == '/contacto/' %} active {% endif %} px-lg-4">
+            <!-- <a class="nav-link text-uppercase text-expanded" href="http://localhost:8000/contacto">Contacto</a> -->
+            <div class="desplegable">
+              <a class="nav-link text-uppercase text-expanded" href="#">Contacto</a>
+              <div class="desplegable-content">
+
+                <a href="http://127.0.0.1:8000/admin/info/informacion/">Agregar contacto</a>
+                <a href="{% url 'contacto' %}">Mostrar</a>
+                <a href="{% url 'formulario' %}">Enviar correo</a>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item {% if request.path == '/blog/' %} active {% endif %} px-lg-4">
+            <!-- <a class="nav-link text-uppercase text-expanded" href="http://localhost:8000/blog">Blog</a> -->
+            <div class="desplegable">
+              <a class="nav-link text-uppercase text-expanded" href="#">Blog</a>
+              <div class="desplegable-content">
+
+                <a href="http://127.0.0.1:8000/admin/blog/categoria/add/">Agregar Categoria</a>
+                <a href="http://127.0.0.1:8000/admin/blog/post/add/">Agregar Post</a>
+                <a href="{% url 'blog' %}">Mostrar</a>
+          </li>
+         
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- este es el contenido cambiante desde la base -->
+  <main>
+  {% block content %}
+
+  {% endblock %}
+</main>
+
+    <!-- Footer -->
+    <footer class="footer text-faded text-center py-5">
+      <div class="container">
+        <p class="m-0">
+	        <a href="#" class="link">
+	          <span class="fa-stack fa-lg">
+	            <i class="fa fa-circle fa-stack-2x"></i>
+	            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+	          </span>
+	        </a>
+	        <a href="#" class="link">
+	          <span class="fa-stack fa-lg">
+	            <i class="fa fa-circle fa-stack-2x"></i>
+	            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+	          </span>
+	        </a>
+	        <a href="#" class="link">
+	          <span class="fa-stack fa-lg">
+	            <i class="fa fa-circle fa-stack-2x"></i>
+	            <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+	          </span>
+	        </a>
+	    </p>
+        <p class="m-0 mbt">
+        	<a href="sample.html" class="link">Política de privacidad</a> ·
+        	<a href="sample.html" class="link">Aviso legal</a> ·
+        	<a href="sample.html" class="link">Cookies</a>
+		</p>
+        <p class="m-0 mbt1">&copy; Gestión de Pedidos 2020</p>
+      </div>
+	</footer>
+
+    <!-- Bootstrap -->
+    <script src="{% static 'proyectowebapp'%}/vendor/jquery/jquery.min.js"></script>
+    <script src="{% static 'proyectowebapp'%}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- configuracion de alertas con sweet alert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  {% if messages %}
+    {% for mensaje in messages %}
+      <script>
+        swal.fire({
+          "title": "Felicitaciones",
+          "text": "{{ mensaje }}",
+          "icon": "success"
+        })
+      </script>
+    {% endfor %}
+  {% endif %}
+</body>
+
+
+</html>

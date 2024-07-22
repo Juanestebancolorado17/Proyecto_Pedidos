@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    {% for post in posts %}
+    <section class="page-section clearfix">
+        <div class="container">
+            <div class="intro">
+                <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{{ post.imagen.url }}" style="width: 60%;">
+                <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+                    <h2 class="section-heading mbi-4">
+                        <span class="section-heading-lower">{{ post.titulo }}</span>
+                        <span class="section-heading-upper">{{ post.contenido }}</span>
+                    </h2>
+                    <div style="text-align: left;">
+                        Autor: {{ post.autor }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endfor %}
+
+    <section style="color: white; text-align: center;">
+        <h5>Categorías:</h5>
+        {% for post in posts %}
+            {% for categoria in post.categorias.all %}
+                <button id="v" ><a style="color: white;" href="{% url 'filtrar_por_categoria' categoria.nombre %}">{{ categoria.nombre }}</a></button>&nbsp;&nbsp;&nbsp;
+            {% endfor %}
+        {% endfor %}
+        <button id="v" ><a style="color: white;" href="{% url 'table' %}">Ver tabla de Categorías</a></button>
+        <br>
+        <button id="v" ><a style="color: white;"   href="{% url 'blog' %}">Posts Completos</a></button>
+    </section>
+</div>
+<style>
+    #v{
+        background-color: rgb(25, 83, 33); 
+        border-radius: 10px;
+    }
+</style>
+{% endblock %}

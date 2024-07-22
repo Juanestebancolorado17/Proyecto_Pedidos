@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<table border="2" style="color: white; margin: auto; width: 900px; text-align: center; margin-top: 5%;">
+    <thead>
+        <tr style="background: rgb(251, 251, 251); color: black;">
+            <td>ID</td>
+            <td>Nombre</td>
+            <td>Precio</td>
+            <td>Imagen</td>
+            <td>Fecha</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% if productos %}
+       
+        {% for producto in productos %}
+        <tr style="background: #060808f9;">
+            <td>{{producto.id}}</td>
+            <td>{{producto.nombre}}</td>
+            <td>{{producto.precio}}</td>
+            <td><img src="{{producto.imagen.url}}" style="width: 150px; height: 150px; margin: 0 auto;"></td>
+            <td>{{producto.created}}</td>
+        </tr>
+    </tbody>
+        {% endfor %}
+        {% else %}
+        <h1>No hay productos</h1>
+        {% endif %}
+</table><br><br>
+&nbsp;&nbsp;
+<a href="{% url 'reporte' %}"><button style="background: rgba(18, 21, 13, 0.445); color: white; font-family: Georgia, 'Times New Roman', Times, serif;">Exportar a Excel</button></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="{% url 'pdf' %}"><button style="background: rgba(18, 21, 13, 0.445); color: white; font-family: Georgia, 'Times New Roman', Times, serif;">Exportar a pdf</button></a>
+<br><br>
+{% endblock %}
+
+

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% if "valido" in request.GET %}
+<p style="color: white;">informacion pasada correctamente</p>
+{% endif %}
+<div class="contenedor">
+    <form action="" method="post" style="text-align: center;">{% csrf_token %}
+        <table style="margin: 20px auto; color: white;">{{miformulario.as_table}}</table>
+        <input type="submit" value="enviar">
+    </form>
+</div>
+
+<!-- <p style="color: white;">{{request.POST}}</p> -->
+
+<!-- <div style="background: white; width: 25%; text-align: center;  border-radius: 15px;">
+<form action="/enviar/" method="post"> {% csrf_token %}
+    <h1>nombre</h1>
+    <input type="text" name="nombre" placeholder="Digite nombre">
+    <br>
+    <h1>Correo</h1>
+    <input type="text" name="correo" placeholder="Digite el correo">
+    <br>
+    <h1>Asunto</h1> 
+    <input type="text" name="asunto" placeholder="asunto">
+    <br>
+    <h1>Mensaje</h1>
+    <textarea name="mensaje" id="" cols="30" rows="10"></textarea>
+    <input type="submit" value="enviar">
+</form>
+</div> -->
+
+
+{% endblock %}
+

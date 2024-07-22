@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación de Pedido</title>
+</head>
+<body>
+    <p>Hola {{ nombre_usuario }},</p>
+    <p>Gracias por tu pedido. A continuación, te mostramos los detalles:</p>
+    
+    <table style="border: solid;">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio unitario</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for linea_pedido in lineas_pedidos %}
+            <tr>
+                <td>{{ linea_pedido.producto.nombre }}</td>
+                <td>{{ linea_pedido.cantidad }}</td>
+                <td>{{ linea_pedido.producto.precio }}</td>
+                <td>{{ linea_pedido.total }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="3">Total del pedido:</td>
+                <td>{{ pedido.total }}</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
